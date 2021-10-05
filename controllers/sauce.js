@@ -1,4 +1,4 @@
-const sauce = require("../models/sauce");
+const Sauce = require("../models/Sauce");
 
 //Afficher toutes les sauces
 exports.getAllSauce = (req, res, next) => {
@@ -23,6 +23,10 @@ exports.createSauce = (req, res, next) => {
     imageUrl: `${req.protocol}://${req.get("host")}/images/${
       req.file.filename
     }`,
+    likes: 0,
+    dislikes: 0,
+    usersLiked: [],
+    usersDisliked: [],
   });
   sauce
     .save()
@@ -67,7 +71,7 @@ exports.likeDislikeSauce = (req, res, next) => {
               .then(() => {
                 res.status(200).json({ message: "J'aime" });
               })
-              .catch((error) => res.status(400).json({ error }));
+              .catch((error) => console.log(error));
           }
           break;
         // L'utilisateur veut annuler son like ou dislike
