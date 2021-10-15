@@ -108,9 +108,7 @@ exports.likeDislikeSauce = (req, res, next) => {
               }
             )
             //Alors message
-            .then(() =>
-              res.status(201).json({ message: "Votre avez retiré votre Like" })
-            )
+            .then(() => res.status(201).json({ message: "Like annulé" }))
             // Sinon on retourne une erreur 400
             .catch((error) => res.status(400).json({ error }));
           return;
@@ -126,11 +124,7 @@ exports.likeDislikeSauce = (req, res, next) => {
                 $pull: { usersDisliked: userId },
               }
             )
-            .then(() =>
-              res
-                .status(201)
-                .json({ message: "Votre avez retiré votre Dislike" })
-            )
+            .then(() => res.status(201).json({ message: "Dislike annulé" }))
             .catch((error) => res.status(400).json({ error }));
           return;
         }
